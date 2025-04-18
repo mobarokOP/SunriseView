@@ -1,11 +1,11 @@
 <p align="center">
-<img alt="PRDownloader" src=https://raw.githubusercontent.com/amitshekhariitbhu/PRDownloader/master/assets/prdownloader.png />
+<img alt="PRDownloader" src=https://raw.githubusercontent.com/mobarokOP/PRDownloader/master/assets/prdownloader.png />
 </p>
 
 # PRDownloader - A file downloader library for Android with pause and resume support
 
 ## Sample Download
-<img src=https://raw.githubusercontent.com/amitshekhariitbhu/PRDownloader/master/assets/sample_download.png width=360 height=640 />
+<img src=https://raw.githubusercontent.com/mobarokOP/PRDownloader/master/assets/sample_download.png width=360 height=640 />
 
 ### Overview of PRDownloader library
 * PRDownloader can be used to download any type of files like image, video, pdf, apk and etc.
@@ -20,14 +20,14 @@
 
 ## About me
 
-Hi, I am Amit Shekhar, Co-Founder @ [Outcome School](https://outcomeschool.com) • IIT 2010-14 • I have taught and mentored many developers, and their efforts landed them high-paying tech jobs, helped many tech companies in solving their unique problems, and created many open-source libraries being used by top companies. I am passionate about sharing knowledge through open-source, blogs, and videos.
+Hello! I’m Mobarok Hossain, a passionate and experienced Android developer from Tabakpur, Ulipur, Kurigram, Bangladesh. With over 3 years of hands-on experience in Android development, I’ve had the privilege of completing more than 200 projects, working across various types of apps—ranging from educational tools to lifestyle utilities. I specialize in building Android applications using Java, and I’m highly skilled in integrating Firebase for powerful backend solutions.
 
 You can connect with me on:
 
-- [Twitter](https://twitter.com/amitiitbhu)
+- [Twitter](https://twitter.com/MobarokOP)
 - [YouTube](https://www.youtube.com/@amitshekhar)
-- [LinkedIn](https://www.linkedin.com/in/amit-shekhar-iitbhu)
-- [GitHub](https://github.com/amitshekhariitbhu)
+- [LinkedIn](https://www.linkedin.com/in/mobarokOP)
+- [GitHub](https://github.com/mobarokOP)
 
 ## Using PRDownloader Library in your Android application
 
@@ -43,12 +43,12 @@ maven { setUrl("https://jitpack.io") }
 
 Add this in your `build.gradle`
 ```groovy
-implementation 'com.github.amitshekhariitbhu:PRDownloader:1.0.2'
+implementation 'com.github.mobarokOP:PRDownloader:1.0.2'
 ```
 
 If you are using `build.gradle.kts`, add the following:
 ```kotlin
-implementation("com.github.amitshekhariitbhu:PRDownloader:1.0.2")
+implementation("com.github.mobarokOP:PRDownloader:1.0.2")
 ```
 
 Do not forget to add internet permission in manifest if already not present
@@ -151,13 +151,13 @@ PRDownloader.cleanUp(days);
 * Test Cases
 * And of course many many features and bug fixes
 
-## [Outcome School Blog](https://outcomeschool.com/blog) - High-quality content to learn Android concepts.
+## [Outcome School Blog](https://mobarokop.github.io/) - High-quality content to learn Android concepts.
 
 ## If this library helps you in anyway, show your love :heart: by putting a :star: on this project :v:
 
 ### License
 ```
-   Copyright (C) 2024 Amit Shekhar
+   Copyright (C) 2025 Mobarok Hossain
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
