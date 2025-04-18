@@ -5,11 +5,9 @@ android {
 
     namespace 'com.downloader'
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 24
         targetSdkVersion 35
         compileSdk 35
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -39,9 +37,9 @@ android {
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'com.github.amitshekhariitbhu'
+            groupId = 'com.github.mobarokOP'
             artifactId = 'PRDownloader'
-            version = '1.0.1'
+            version = '1.0.0'
 
             afterEvaluate {
                 from components.release
