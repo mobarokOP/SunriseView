@@ -1,1 +1,1 @@
-include ':app', ':prdownloader'
+include ':app', ':pdf_viewer'
