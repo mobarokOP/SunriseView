@@ -6,8 +6,8 @@ android {
     namespace 'com.pdfviewer'
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 35
-        compileSdk 35
+        targetSdkVersion 36
+        compileSdk 36
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -27,7 +27,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.github.barteksc:pdfium-android:1.9.0'
+    //implementation 'com.github.barteksc:pdfium-android:1.9.0'
+    implementation 'com.github.marain87:PdfiumAndroid:1.9.7'
 }
 
 android {
@@ -41,7 +42,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.github.mobarokOP'
             artifactId = 'PdfViewer'
-            version = '1.0.0'
+            version = '1.0.1'
 
             afterEvaluate {
                 from components.release

@@ -1,8 +1,9 @@
 package com.pdfviewer;
 
 import android.graphics.RectF;
-import android.support.annotation.Nullable;
 
+
+import androidx.annotation.Nullable;
 
 import com.pdfviewer.model.PagePart;
 import com.pdfviewer.util.Constants;
