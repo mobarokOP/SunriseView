@@ -2,7 +2,9 @@
 
 Add to _build.gradle_:
 
-`implementation 'com.github.mobarokOP:PdfViewer:1.0.1'`
+```
+implementation 'com.github.mobarokOP:PdfViewer:1.0.1'
+```
 
 
 ## ProGuard
