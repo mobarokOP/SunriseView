@@ -6,6 +6,12 @@ Add to _build.gradle_:
 implementation 'com.github.mobarokOP:PdfViewer:1.0.1'
 ```
 
+Add to _settings.gradle_:
+
+``` Under ependencyResolutionManagement >> repositories
+			maven { url 'https://jitpack.io' }
+```
+
 
 ## ProGuard
 If you are using ProGuard, add following rule to proguard config file:
