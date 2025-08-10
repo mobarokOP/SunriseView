@@ -1,182 +1,205 @@
-<p align="center">
-<img alt="PRDownloader" src=https://raw.githubusercontent.com/mobarokOP/PRDownloader/master/assets/prdownloader.png />
-</p>
+## Installation
 
-# PRDownloader - A file downloader library for Android with pause and resume support
+Add to _build.gradle_:
 
-## Sample Download
-<img src=https://raw.githubusercontent.com/mobarokOP/PRDownloader/master/assets/sample_download.png width=360 height=640 />
+`implementation 'com.github.mobarokOP:PdfViewer:1.0.1'`
 
-### Overview of PRDownloader library
-* PRDownloader can be used to download any type of files like image, video, pdf, apk and etc.
-* This file downloader library supports pause and resume while downloading a file.
-* Supports large file download.
-* This downloader library has a simple interface to make download request.
-* We can check if the status of downloading with the given download Id.
-* PRDownloader gives callbacks for everything like onProgress, onCancel, onStart, onError and etc while downloading a file.
-* Supports proper request canceling.
-* Many requests can be made in parallel.
-* All types of customization are possible.
 
-## About me
+## ProGuard
+If you are using ProGuard, add following rule to proguard config file:
 
-Hello! I’m Mobarok Hossain, a passionate and experienced Android developer from Tabakpur, Ulipur, Kurigram, Bangladesh. With over 3 years of hands-on experience in Android development, I’ve had the privilege of completing more than 200 projects, working across various types of apps—ranging from educational tools to lifestyle utilities. I specialize in building Android applications using Java, and I’m highly skilled in integrating Firebase for powerful backend solutions.
-
-You can connect with me on:
-
-- [Facebook](https://facebook.com/mobarokOP)
-- [Whatsapp](https://wa.me/8801408874276)
-- [GitHub](https://github.com/mobarokOP)
-- [Twitter](https://twitter.com/mobarokOP)
-- [YouTube](https://www.youtube.com/@mobarokOP)
-- [LinkedIn](https://www.linkedin.com/in/mobarokOP)
-
-## Using PRDownloader Library in your Android application
-
-Add this in your `settings.gradle`:
-```groovy
-maven { url 'https://jitpack.io' }
+```proguard
+-keep class com.shockwave.**
 ```
 
-If you are using `settings.gradle.kts`, add the following:
-```kotlin
-maven { setUrl("https://jitpack.io") }
+## Include PDFView in your layout
+
+``` xml
+
+    <com.pdfviewer.PDFView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pdfView"/>
 ```
 
-Version:
-[![](https://jitpack.io/v/mobarokOP/PRDownloader.svg)](https://jitpack.io/#mobarokOP/PRDownloader)
+## Load a PDF file
 
-Add this in your `build.gradle`
-```groovy
-implementation 'com.github.mobarokOP:PRDownloader:1.0.0'
+All available options with default values:
+``` java
+
+pdfView.fromUri(Uri)
+or
+pdfView.fromFile(File)
+or
+pdfView.fromBytes(byte[])
+or
+pdfView.fromStream(InputStream) // stream is written to bytearray - native code cannot use Java Streams
+or
+pdfView.fromSource(DocumentSource)
+or
+pdfView.fromAsset(String)
+    .pages(0, 2, 1, 3, 3, 3) // all pages are displayed by default
+    .enableSwipe(true) // allows to block changing pages using swipe
+    .swipeHorizontal(false)
+    .enableDoubletap(true)
+    .defaultPage(0)
+    // allows to draw something on the current page, usually visible in the middle of the screen
+    .onDraw(onDrawListener)
+    // allows to draw something on all pages, separately for every page. Called only for visible pages
+    .onDrawAll(onDrawListener)
+    .onLoad(onLoadCompleteListener) // called after document is loaded and starts to be rendered
+    .onPageChange(onPageChangeListener)
+    .onPageScroll(onPageScrollListener)
+    .onError(onErrorListener)
+    .onPageError(onPageErrorListener)
+    .onRender(onRenderListener) // called after document is rendered for the first time
+    // called on single tap, return true if handled, false to toggle scroll handle visibility
+    .onTap(onTapListener)
+    .onLongPress(onLongPressListener)
+    .enableAnnotationRendering(false) // render annotations (such as comments, colors or forms)
+    .password(null)
+    .scrollHandle(null)
+    .enableAntialiasing(true) // improve rendering a little bit on low-res screens
+    // spacing between pages in dp. To define spacing color, set view background
+    .spacing(0)
+    .autoSpacing(false) // add dynamic spacing to fit each page on its own on the screen
+    .linkHandler(DefaultLinkHandler)
+    .pageFitPolicy(FitPolicy.WIDTH) // mode to fit pages in the view
+    .fitEachPage(false) // fit each page to the view, else smaller pages are scaled relative to largest page.
+    .pageSnap(false) // snap pages to screen boundaries
+    .pageFling(false) // make a fling change only a single page like ViewPager
+    .nightMode(false) // toggle night mode
+    .load();
 ```
 
-If you are using `build.gradle.kts`, add the following:
-```kotlin
-implementation("com.github.mobarokOP:PRDownloader:1.0.0")
+* `pages` is optional, it allows you to filter and order the pages of the PDF as you need
+
+## Scroll handle
+
+Scroll handle is replacement for **ScrollBar** from 1.x branch.
+
+From version 2.1.0 putting **PDFView** in **RelativeLayout** to use **ScrollHandle** is not required, you can use any layout.
+
+To use scroll handle just register it using method `Configurator#scrollHandle()`.
+This method accepts implementations of **ScrollHandle** interface.
+
+There is default implementation shipped with AndroidPdfViewer, and you can use it with
+`.scrollHandle(new DefaultScrollHandle(this))`.
+**DefaultScrollHandle** is placed on the right (when scrolling vertically) or on the bottom (when scrolling horizontally).
+By using constructor with second argument (`new DefaultScrollHandle(this, true)`), handle can be placed left or top.
+
+You can also create custom scroll handles, just implement **ScrollHandle** interface.
+All methods are documented as Javadoc comments on interface [source](https://github.com/mobarokOP/PdfViewer/blob/master/pdf_viewer/src/main/java/com/pdfviewer/scroll/ScrollHandle.java).
+
+## Document sources
+Version 2.3.0 introduced _document sources_, which are just providers for PDF documents.
+Every provider implements **DocumentSource** interface.
+Predefined providers are available in **com.github.barteksc.pdfviewer.source** package and can be used as
+samples for creating custom ones.
+
+Predefined providers can be used with shorthand methods:
+```
+pdfView.fromUri(Uri)
+pdfView.fromFile(File)
+pdfView.fromBytes(byte[])
+pdfView.fromStream(InputStream)
+pdfView.fromAsset(String)
+```
+Custom providers may be used with `pdfView.fromSource(DocumentSource)` method.
+
+## Links
+Version 3.0.0 introduced support for links in PDF documents. By default, **DefaultLinkHandler**
+is used and clicking on link that references page in same document causes jump to destination page
+and clicking on link that targets some URI causes opening it in default application.
+
+You can also create custom link handlers, just implement **LinkHandler** interface and set it using
+`Configurator#linkHandler(LinkHandler)` method. Take a look at [DefaultLinkHandler](https://github.com/mobarokOP/PdfViewer/blob/master/pdf_viewer/src/main/java/com/pdfviewer/link/DefaultLinkHandler.java)
+source to implement custom behavior.
+
+## Pages fit policy
+Since version 3.0.0, library supports fitting pages into the screen in 3 modes:
+* WIDTH - width of widest page is equal to screen width
+* HEIGHT - height of highest page is equal to screen height
+* BOTH - based on widest and highest pages, every page is scaled to be fully visible on screen
+
+Apart from selected policy, every page is scaled to have size relative to other pages.
+
+Fit policy can be set using `Configurator#pageFitPolicy(FitPolicy)`. Default policy is **WIDTH**.
+
+## Additional options
+
+### Bitmap quality
+By default, generated bitmaps are _compressed_ with `RGB_565` format to reduce memory consumption.
+Rendering with `ARGB_8888` can be forced by using `pdfView.useBestQuality(true)` method.
+
+### Double tap zooming
+There are three zoom levels: min (default 1), mid (default 1.75) and max (default 3). On first double tap,
+view is zoomed to mid level, on second to max level, and on third returns to min level.
+If you are between mid and max levels, double tapping causes zooming to max and so on.
+
+Zoom levels can be changed using following methods:
+
+``` java
+void setMinZoom(float zoom);
+void setMidZoom(float zoom);
+void setMaxZoom(float zoom);
 ```
 
-Do not forget to add internet permission in manifest if already not present
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-```
-Then initialize it in onCreate() Method of application class :
-```java
-PRDownloader.initialize(getApplicationContext());
-```
-Initializing it with some customization
-```java
-// Enabling database for resume support even after the application is killed:
-PRDownloaderConfig config = PRDownloaderConfig.newBuilder()
-                .setDatabaseEnabled(true)
-                .build();
-PRDownloader.initialize(getApplicationContext(), config);
+## Possible questions
+### Why resulting apk is so big?
+Android PdfViewer depends on PdfiumAndroid, which is set of native libraries (almost 16 MB) for many architectures.
+Apk must contain all this libraries to run on every device available on market.
+Fortunately, Google Play allows us to upload multiple apks, e.g. one per every architecture.
+There is good article on automatically splitting your application into multiple apks,
+available [here](http://ph0b.com/android-studio-gradle-and-ndk-integration/).
+Most important section is _Improving multiple APKs creation and versionCode handling with APK Splits_, but whole article is worth reading.
+You only need to do this in your application, no need for forking PdfiumAndroid or so.
 
-// Setting timeout globally for the download network requests:
-PRDownloaderConfig config = PRDownloaderConfig.newBuilder()
-                .setReadTimeout(30_000)
-                .setConnectTimeout(30_000)
-                .build();
-PRDownloader.initialize(getApplicationContext(), config); 
-```
+### Why I cannot open PDF from URL?
+Downloading files is long running process which must be aware of Activity lifecycle, must support some configuration, 
+data cleanup and caching, so creating such module will probably end up as new library.
 
-### Make a download request
-```java
-int downloadId = PRDownloader.download(url, dirPath, fileName)
-                        .build()
-                        .setOnStartOrResumeListener(new OnStartOrResumeListener() {
-                            @Override
-                            public void onStartOrResume() {
-                               
-                            }
-                        })
-                        .setOnPauseListener(new OnPauseListener() {
-                            @Override
-                            public void onPause() {
-                               
-                            }
-                        })
-                        .setOnCancelListener(new OnCancelListener() {
-                            @Override
-                            public void onCancel() {
-                                
-                            }
-                        })
-                        .setOnProgressListener(new OnProgressListener() {
-                            @Override
-                            public void onProgress(Progress progress) {
-                               
-                            }
-                        })
-                        .start(new OnDownloadListener() {
-                            @Override
-                            public void onDownloadComplete() {
-                               
-                            }
+### How can I show last opened page after configuration change?
+You have to store current page number and then set it with `pdfView.defaultPage(page)`, refer to sample app
 
-                            @Override
-                            public void onError(Error error) {
-                               
-                            }
-                        });            
+### How can I fit document to screen width (eg. on orientation change)?
+Use `FitPolicy.WIDTH` policy or add following snippet when you want to fit desired page in document with different page sizes:
+``` java
+Configurator.onRender(new OnRenderListener() {
+    @Override
+    public void onInitiallyRendered(int pages, float pageWidth, float pageHeight) {
+        pdfView.fitToWidth(pageIndex);
+    }
+});
 ```
 
-### Pause a download request
-```java
-PRDownloader.pause(downloadId);
+### How can I scroll through single pages like a ViewPager?
+You can use a combination of the following settings to get scroll and fling behaviour similar to a ViewPager:
+``` java
+    .swipeHorizontal(true)
+    .pageSnap(true)
+    .autoSpacing(true)
+    .pageFling(true)
 ```
 
-### Resume a download request
-```java
-PRDownloader.resume(downloadId);
+## One more thing
+If you have any suggestions on making this lib better, write me, create issue or write some code and send pull request.
+
+## License
+
+Created with the help of android-pdfview by [Mobarok Hossain](http://mobarokop.github.io/)
 ```
+Copyright 2025 Mobarok Hossain
 
-### Cancel a download request
-```java
-// Cancel with the download id
-PRDownloader.cancel(downloadId);
-// The tag can be set to any request and then can be used to cancel the request
-PRDownloader.cancel(TAG);
-// Cancel all the requests
-PRDownloader.cancelAll();
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
-
-### Status of a download request
-```java
-Status status = PRDownloader.getStatus(downloadId);
-```
-
-### Clean up resumed files if database enabled
-```java
-// Method to clean up temporary resumed files which is older than the given day
-PRDownloader.cleanUp(days);
-```
-### TODO
-* Integration with other libraries like OkHttp, RxJava
-* Test Cases
-* And of course many many features and bug fixes
-
-## [Mobarok Hossain](https://mobarokop.github.io/) - Learn More About Myself.
-
-## If this library helps you in anyway, show your love :heart: by putting a :star: on this project :v:
-
-### License
-```
-   Copyright (C) 2025 Mobarok Hossain
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-```
-
-### Contributing to PRDownloader
-All pull requests are welcome, make sure to follow the [contribution guidelines](CONTRIBUTING.md)
-when you submit pull request.
