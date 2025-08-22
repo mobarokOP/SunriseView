@@ -3,12 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sample.MainActivity">
 
-
-    <com.pdfviewer.PDFView
+    <com.sunriseview.SunriseView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pdfView"/>
+        android:layout_height="wrap_content"
+        app:ssv_sunDrawable="@drawable/ic_sun"
+        app:ssv_labelColor="@color/black"
+        app:ssv_trackColor="@color/colorPrimary"
+        app:ssv_trackWidth="5dp"
+        app:ssv_labelTextSize="10sp"
+        android:id="@+id/sunriseView"/>
+
+
+
 
 </LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SunriseSunsetView">
+        <attr name="ssv_sunDrawable" format="reference" />
+        <attr name="ssv_trackColor" format="color"/>
+        <attr name="ssv_trackWidth" format="dimension"/>
+        <attr name="ssv_shadowColor" format="color"/>
+        <attr name="ssv_sunColor" format="color"/>
+        <attr name="ssv_sunRadius" format="dimension"/>
+        <attr name="ssv_labelColor" format="color"/>
+        <attr name="ssv_labelTextSize" format="dimension"/>
+        <attr name="ssv_labelHorizontalOffset" format="dimension"/>
+        <attr name="ssv_labelVerticalOffset" format="dimension"/>
+    </declare-styleable>
+</resources>

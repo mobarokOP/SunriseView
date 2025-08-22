@@ -1,1 +1,1 @@
-include ':app', ':pdf_viewer'
+include ':app', ':sunriseview'
