@@ -1,7 +1,7 @@
 ## Preview
 
 
-![](/Users/mobarok/AndroidStudioProjects/PdfViewer/app/src/main/assets/img.png)
+![](https://raw.githubusercontent.com/mobarokOP/SunriseView/refs/heads/master/app/src/main/assets/img.png)
 
 
 ## Installation
