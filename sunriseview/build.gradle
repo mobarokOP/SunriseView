@@ -40,7 +40,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.github.mobarokOP'
             artifactId = 'SunriseView'
-            version = '1.0.0'
+            version = '1.0.1'
 
             afterEvaluate {
                 from components.release

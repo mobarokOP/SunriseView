@@ -4,12 +4,13 @@
 ![](/Users/mobarok/AndroidStudioProjects/PdfViewer/app/src/main/assets/img.png)
 
 
+
 ## Installation
 
 Add to _build.gradle_:
 
 ```
-implementation 'com.github.mobarokOP:SunriseView:1.0.0'
+implementation 'com.github.mobarokOP:SunriseView:1.0.1'
 ```
 
 Add to _settings.gradle_:
@@ -23,23 +24,30 @@ Add to _settings.gradle_:
 
 ``` xml
 
-    <com.sunriseview.SunriseView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:ssv_sunDrawable="@drawable/ic_sun"
-        app:ssv_labelColor="@color/black"
-        app:ssv_trackColor="@color/colorPrimary"
-        app:ssv_trackWidth="5dp"
-        app:ssv_labelTextSize="10sp"
-        android:id="@+id/sunriseView"/>
+         <com.sunriseview.SunriseView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:sunrise_text_color="@color/white"
+            app:sunrise_track_color="@color/white"
+            app:sunrise_track_width="1.5dp"
+            app:sunrise_text_size="10sp"
+            app:sunrise_sun_radius="10dp"
+            android:id="@+id/sunriseView"/>
 ```
 
 ## Load The ProgressBar
 
 All available options with default values:
 ``` java
-  SunriseView sunView = findViewById(R.id.sunriseView);
-        sunView.setRatio(7, 30, 18, 30, /* now */ LocalTime.now());
+  SunriseView mSunriseSunsetView = findViewById(R.id.sunriseView);
+        
+         int sunriseHour = 6;
+        int sunriseMinute = 17;
+        int sunsetHour = 18;
+        int sunsetMinute = 32;
+        mSunriseSunsetView.setSunriseTime(new Time(sunriseHour, sunriseMinute));
+        mSunriseSunsetView.setSunsetTime(new Time(sunsetHour, sunsetMinute));
+        mSunriseSunsetView.startAnimate();
 
 ```
 

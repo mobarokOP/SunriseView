@@ -6,15 +6,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sample.MainActivity">
 
-    <com.sunriseview.SunriseView
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:ssv_sunDrawable="@drawable/ic_sun"
-        app:ssv_labelColor="@color/black"
-        app:ssv_trackColor="@color/colorPrimary"
-        app:ssv_trackWidth="5dp"
-        app:ssv_labelTextSize="10sp"
-        android:id="@+id/sunriseView"/>
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:background="@color/colorPrimary"
+        tools:showIn="@layout/activity_main">
+
+
+        <com.sunriseview.SunriseView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:sunrise_text_color="@color/white"
+            app:sunrise_track_color="@color/white"
+            app:sunrise_track_width="1.5dp"
+            app:sunrise_text_size="10sp"
+            app:sunrise_sun_radius="10dp"
+            android:id="@+id/sunriseView"/>
+
+
+
+
+        <TextView
+            android:id="@+id/sr_prompt_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sunriseView"
+            android:layout_margin="10dp"
+            android:text="Sunrise time"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/sunrise_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/sr_prompt_tv"
+            android:layout_below="@id/sunriseView"
+            android:layout_toEndOf="@id/sr_prompt_tv"
+            android:padding="10dp"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/ss_prompt_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sr_prompt_tv"
+            android:layout_margin="10dp"
+            android:text="Sunset Time"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/sunset_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/ss_prompt_tv"
+            android:layout_below="@id/sr_prompt_tv"
+            android:layout_toEndOf="@id/ss_prompt_tv"
+            android:padding="10dp"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ss_prompt_tv"
+            android:layout_margin="10dp"
+            android:text="Update"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
 
 
 

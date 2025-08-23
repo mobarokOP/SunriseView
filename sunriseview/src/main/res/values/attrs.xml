@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SunriseSunsetView">
-        <attr name="ssv_sunDrawable" format="reference" />
-        <attr name="ssv_trackColor" format="color"/>
-        <attr name="ssv_trackWidth" format="dimension"/>
-        <attr name="ssv_shadowColor" format="color"/>
-        <attr name="ssv_sunColor" format="color"/>
-        <attr name="ssv_sunRadius" format="dimension"/>
-        <attr name="ssv_labelColor" format="color"/>
-        <attr name="ssv_labelTextSize" format="dimension"/>
-        <attr name="ssv_labelHorizontalOffset" format="dimension"/>
-        <attr name="ssv_labelVerticalOffset" format="dimension"/>
-    </declare-styleable>
+        <declare-styleable name="SunriseView">
+            <!-- Track color -->
+            <attr name="sunrise_track_color" format="color|reference"/>
+            <!-- Track width -->
+            <attr name="sunrise_track_width" format="dimension"/>
+
+            <!-- Sun radius -->
+            <attr name="sunrise_sun_radius" format="dimension"/>
+            <!-- Sun color -->
+            <attr name="sunrise_sun_color" format="color|reference"/>
+
+            <!-- Shadow color -->
+            <attr name="sunrise_shadow_color" format="color|reference"/>
+
+            <!-- Label text size -->
+            <attr name="sunrise_text_size" format="dimension"/>
+            <!-- Label text color -->
+            <attr name="sunrise_text_color" format="color|reference"/>
+            <!-- Label vertical offset -->
+            <attr name="sunrise_vertical_offset" format="dimension"/>
+            <!-- Label horizontal gap -->
+            <attr name="sunrise_horizontal_offset" format="dimension"/>
+            <attr name="sunrise_sun_drawable" format="reference"/>
+        </declare-styleable>
 </resources>
