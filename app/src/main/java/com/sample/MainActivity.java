@@ -133,10 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void refreshSSV(int sunriseHour, int sunriseMinute, int sunsetHour, int sunsetMinute) {
-        int sunriseHour = 6;
-        int sunriseMinute = 17;
-        int sunsetHour = 18;
-        int sunsetMinute = 32;
         mSunriseSunsetView.setSunriseTime(new Time(sunriseHour, sunriseMinute));
         mSunriseSunsetView.setSunsetTime(new Time(sunsetHour, sunsetMinute));
         mSunriseSunsetView.startAnimate();
